@@ -91,6 +91,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
+        // incremental search
         debounce_timer?.invalidate()
         debounce_timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
             if let searchText = textField.text, searchText != "" {
@@ -121,7 +122,7 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    // 自動読み込み
+    // load data when scroll to bottom
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if isDataLoaded && isDataEnded == false {
             if indexPath.row >= (githubSearchRepositories.count - 2) {

@@ -22,7 +22,6 @@ class RepositoryResultTableViewCell: UITableViewCell {
     
     func configure(repository: GithubSearchRepository) {
         repositoryName.text = repository.repositoryName
-//        repositoryDescription.text = repository.repositoryDescription
         repositoryStarCount.text = String(repository.star)
     }
 }
