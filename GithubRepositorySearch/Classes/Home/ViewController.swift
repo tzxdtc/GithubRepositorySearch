@@ -86,7 +86,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
             DispatchQueue.main.async {
                 self.repositoryResultsTableView.reloadData()
             }
-            self.isDataEnded = self.githubSearchRepositories.count < self.perPage
+            self.isDataEnded = githubSearchRepositories.count < self.perPage
         }
     }
 
@@ -94,11 +94,13 @@ class ViewController: UIViewController, WKNavigationDelegate {
         // incremental search
         debounce_timer?.invalidate()
         debounce_timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+            self.githubSearchRepositories = []
             if let searchText = textField.text, searchText != "" {
+                self.indicatorView.isHidden = false
                 self.searchText = searchText
                 self.loadGithubRepositories()
             } else {
-                self.githubSearchRepositories = []
+                self.indicatorView.isHidden = true
                 self.repositoryResultsTableView.reloadData()
             }
         }
